@@ -1,0 +1,18 @@
+.navigation__list{
+    padding: 0 10px;
+    margin-top: 30px;
+    min-width: 250px;
+}
+.navigation__link{
+    color: inherit;
+    padding: 10px 15px;
+    width: 100%;
+    display: block;
+    border-radius: 5px;
+}
+.navigation__link.active{
+    font-weight: 600;
+}
+.navigation__link:hover{
+    background-color: #e9f4fa;
+}

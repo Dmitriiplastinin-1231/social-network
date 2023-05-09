@@ -1,0 +1,121 @@
+.users{
+    margin-top: 30px;
+}
+.user{
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 8px;
+    border-radius: 9px;
+    border: 3px solid transparent;
+}
+.user.m{
+    border-color: #7ba9e6;
+    
+}
+.user.w{
+    border-color: #dd7be6;
+
+}
+.left{
+    display: flex;
+    align-items: stretch;
+}
+
+.left__item{
+    margin-right: 20px;
+}
+.left__item.left__item__descr{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.name{
+    margin-bottom: 25px;
+    font-weight: 900;
+}
+.name__link{
+    color: inherit;
+}
+.status{
+    max-width: 650px;
+    word-break: break-all;
+}
+.avatar{
+    display: block;
+    height: 150px;
+    width: 150px;
+    margin: 0 15px 10px;
+    border-radius: 50%;
+}
+.followBtn{
+    width: 100%;
+    color: #fff;
+    background-color: #9c10dd;
+    padding: 7px 10px;
+    border: 3px solid #6e81eb;
+    cursor: pointer;
+    transition: all .3s;
+}
+.followBtn.active{
+    background-color: #4c78d8;
+}
+.followBtn.active:hover{
+    background-color: #9c10dd;
+
+}
+.followBtn:hover{
+    background-color: #4c78d8;
+}
+.right div{
+    margin: 15px;
+}
+.users__add{
+    border-radius: 5px;
+    cursor: pointer;
+    color: #fff;
+    margin: 0 auto;
+    display: block;
+    width: 200px;
+    height: 50px;
+    padding: 10px 20px;
+    border: 2px solid #5fb102fd;
+    background-color: #3382b6;
+    transition: all .3s;
+}
+.users__add:hover{
+    background-color: #8ac2e7;
+}
+
+.pagination__list{
+    display: flex;
+    justify-content: center;
+}
+.pagination__list__item{
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #ccc;
+    color: #111;
+    cursor: pointer;
+}
+.pagination__list__item:hover{
+    background-color: #ebebeb;
+
+}
+.pagination__list__item + .pagination__list__item{
+    margin-left: 8px;
+}
+.pagination__list__item.active{
+    font-weight: 700;  
+}
+.pagination__list__item.ellipsis{
+    cursor: auto;
+}
+.pagination__list__item.ellipsis:hover{
+    background-color: inherit;
+}

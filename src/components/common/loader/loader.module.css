@@ -1,0 +1,25 @@
+.inner{
+    height: calc(100vh - 128px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.loader{
+    transform: translateY(-50%);
+    animation-name: loader;
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    border-radius: 50%;
+}
+@keyframes loader {
+    from{
+        transform: translateY(-50%) rotate(0);
+    }
+    50%{
+        transform: translateY(-50%) rotate(180deg);
+    }
+    to{
+        transform: translateY(-50%) rotate(360deg);
+    }
+}
