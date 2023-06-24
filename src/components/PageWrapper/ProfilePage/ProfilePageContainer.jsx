@@ -1,17 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { displayUserProfile, getStatus,updateStatus, savePhoto } from '../../../redux/profile-reducer';
+import { displayUserProfile, getStatus,updateStatus, savePhoto } from '../../../redux-toolkit/slices/profileSlice';
 import ProfilePage from './ProfilePage';
 import { withNavigate } from '../../../hoc/withNavigateFunction';
 import { withParams } from '../../../hoc/withParams';
 import { compose } from 'redux';
-import { profileSelectors, authSelectors } from '../../../redux/selectors';
+import { profileSelectors, authSelectors } from '../../../redux-toolkit/selectors';
 
- 
+
 
 
 class ProfilePageContainer extends React.Component{
-    
+
     refreshProfile(){
         if (!this.props.param.userId ){
             if (!this.props.authorizedId && !this.props.isAuth){
@@ -21,7 +21,7 @@ class ProfilePageContainer extends React.Component{
             this.props.param.userId = this.props.authorizedId;
             this.isMyOwn = true;
         }
-        
+
         this.props.displayUserProfile(this.props.param.userId)
         this.props.getStatus(this.props.param.userId)
     }
@@ -29,7 +29,7 @@ class ProfilePageContainer extends React.Component{
     componentDidMount(){
         this.refreshProfile()
     }
-    
+
     componentDidUpdate(prevProps) {
         if (this.props.param.userId != prevProps.param.userId){
             this.refreshProfile()
@@ -37,13 +37,13 @@ class ProfilePageContainer extends React.Component{
     }
 
     render(){
-        
-        return <ProfilePage {...this.props} 
-            profile={this.props.profile} 
-            status={this.props.status} 
-            updateStatus={this.props.updateStatus} 
+
+        return <ProfilePage {...this.props}
+            profile={this.props.profile}
+            status={this.props.status}
+            updateStatus={this.props.updateStatus}
             savePhoto={this.props.savePhoto}
-            isMyOwn={this.isMyOwn} 
+            isMyOwn={this.isMyOwn}
         />
     }
 }

@@ -8,7 +8,7 @@ export const userApi = {
     getUsers(currentPage, pageSize){
         return instanse.get(`users?page=${currentPage}&count=${pageSize}`)
             .then(response => response.data)
-    } 
+    }
 }
 
 export const followApi = {
@@ -32,6 +32,7 @@ export const authApi = {
             .then (response => response.data)
     },
     logout(){
+        debugger
         return instanse.delete('auth/login')
             .then (response => response.data)
     }
@@ -41,7 +42,7 @@ export const profileApi = {
     setProfile(userId){
         return axios.get(baseURL + 'profile/' + userId)
             .then(response => response.data)
-    }, 
+    },
     getStatus(userId){
         return instanse.get('profile/status/' + userId)
             .then(response => response.data)

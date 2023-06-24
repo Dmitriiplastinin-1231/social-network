@@ -8,8 +8,8 @@ import { required } from '../../../utilities/validation/validation';
 const DialogForm = (props) => {
     return (
         <form className={`form ${s.form}`} onSubmit={props.handleSubmit}>
-            <Field 
-                className='form-textarea' 
+            <Field
+                className='form-textarea'
                 name='messageText'
                 component='textarea'
                 placeholder='Введите сообщение'
@@ -22,7 +22,7 @@ const DialogForm = (props) => {
 
 
 function Dialogs(props){
-    
+
 
     let dialogsElements = props.messagesPage.dialogList.map(person => {
         return <DialogItem name={person.name} key={person.id} id={person.id} />
@@ -32,10 +32,10 @@ function Dialogs(props){
         return <Message message={message.message} key={message.id}/>
     });
 
-    
-    
+
+
     const onSubmit = (data) => {
-        props.addMessage(data.messageText, props.MyId, 1)
+        props.addMessage(data.messageText)
     }
 
 

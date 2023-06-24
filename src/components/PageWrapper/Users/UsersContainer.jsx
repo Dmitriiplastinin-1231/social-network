@@ -1,23 +1,23 @@
 import { connect } from 'react-redux';
-import { setUsers, toggleFollow } from '../../../redux/users-reducer';
+import { setUsers, toggleFollow } from '../../../redux-toolkit/slices/usersSlice';
 import React from 'react';
 import Users from './Users';
-import { userSelectors } from '../../../redux/selectors';
+import { userSelectors } from '../../../redux-toolkit/selectors';
 
 
 class UsersAPIComponent extends React.Component {
-      
+
     componentDidMount(){
-        this.props.setUsers(this.props.pageSize)   
+        this.props.setUsers(this.props.pageSize)
     }
-    
+
     onPageChanged = (pageNumber) => {
         this.props.setUsers(this.props.pageSize, pageNumber)
     }
 
     render() {
         return(
-            <Users 
+            <Users
                 // currentPage={this.props.currentPage}
                 // totalUsersCount={this.props.totalUsersCount}
                 // pageSize={this.props.pageSize}

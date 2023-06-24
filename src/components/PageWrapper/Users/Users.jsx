@@ -4,7 +4,7 @@ import Loader from '../../common/loader/loader';
 
 
 let Users = (props) => {
-    
+
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
     let pages = [];
 
@@ -17,7 +17,7 @@ let Users = (props) => {
     let largeChanger = props.currentPage + 2
     let pagesChanger = pages.slice(lessChanger, largeChanger)
 
-    
+
     return(
         <section className={s.users}>
             <div className={s.pagination}>
@@ -35,16 +35,15 @@ let Users = (props) => {
             </div>
             {props.isFetching?<Loader />:<div className="users__inner">
                 {props.users.map(user => {
-                    return <User  
+                    return <User
                     user={user}
                     toggleFollow={props.toggleFollow}
                     key={user.id}
-                    toggleFollowingProgress={props.toggleFollowingProgress}
                     isFollowingProgress={props.isFollowingProgress}
                 />
             })}
             </div>}
-            
+
         </section>
     )
 }
