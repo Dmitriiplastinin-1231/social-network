@@ -4,7 +4,7 @@ import { maxLength30, required } from '../../../utilities/validation/validation'
 import { FormInput } from '../../common/FormsControl/FormsControl';
 import { connect } from 'react-redux';
 import { login } from '../../../redux-toolkit/slices/authSlice';
-import { Navigate } from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
 
 const LoginForm = (props) => {
     return(
@@ -27,7 +27,7 @@ const LoginForm = (props) => {
                     <span className={s.checkbox__span}></span>
                     Remember me
                 </label>
-                <a className={s.form__link} href="https://social-network.samuraijs.com/signUp">You can register here</a>
+                <Link className={s.form__link} to="/register">You can register here</Link>
             </div>
         </form>
     )

@@ -1,12 +1,12 @@
-import s from './LoginPage.module.css';
+import s from './Register.module.css';
 import { Field, reduxForm } from 'redux-form';
-import { maxLength30, required } from '../../../utilities/validation/validation';
+import { maxLength30, required, confirmPassword } from '../../../utilities/validation/validation';
 import { FormInput } from '../../common/FormsControl/FormsControl';
 import { connect } from 'react-redux';
 import { login } from '../../../redux-toolkit/slices/authSlice';
-import { Navigate } from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
 
-const LoginForm = (props) => {
+const RegisterForm = (props) => {
     return(
         <form className={`${s.form} ${props.error && s.form__error}`} onSubmit={ props.handleSubmit } action="#">
             <label className={s.label}>
@@ -16,6 +16,10 @@ const LoginForm = (props) => {
             <label className={s.label}>
                 Password *
                 <Field className={s.input} type="text" component={FormInput} name='password' validate={[required]} />
+            </label>
+            <label className={s.label}>
+                Confirm the password *
+                <Field className={s.input} type="text" component={FormInput} name='passwordConfirm' validate={[required, confirmPassword]} />
             </label>
             <div className={s.error__output}>
                 {props.error}
@@ -27,18 +31,18 @@ const LoginForm = (props) => {
                     <span className={s.checkbox__span}></span>
                     Remember me
                 </label>
-                <a className={s.form__link} href="https://social-network.samuraijs.com/signUp">You can register here</a>
+                <Link className={s.form__link} to="/login">You can login here</Link>
             </div>
         </form>
     )
 }
 
-const LoginReduxForm = reduxForm({form: 'login'})(LoginForm);
+const LoginReduxForm = reduxForm({form: 'register'})(RegisterForm);
 
 
 
 
-const LoginPage = (props) => {
+const RegisterPage = (props) => {
     const onSubmit = ({email, password, rememberMe}) => {
         props.login(email, password, rememberMe)
     }
@@ -47,7 +51,7 @@ const LoginPage = (props) => {
     }
     return (
         <section className={s.loginPage}>
-            <h1 className={s.title}>Log in</h1>
+            <h1 className={s.title}>Register</h1>
             <LoginReduxForm onSubmit={onSubmit} />
         </section>
     )
@@ -58,6 +62,6 @@ const mapStateToProps = (state) => ({
     isAuth: state.auth.isAuth
 })
 
-const LoginPageContainer = connect(mapStateToProps, { login })(LoginPage)
+const RegisterPageContainer = connect(mapStateToProps, { login })(RegisterPage)
 
-export default LoginPageContainer;
+export default RegisterPageContainer;

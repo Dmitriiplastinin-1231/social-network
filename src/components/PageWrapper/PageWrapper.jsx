@@ -1,5 +1,6 @@
 import Aside from './Aside/Aside';
 import LoginPage from './Login/LoginPage';
+import RegisterPage from './Register/Register';
 import './PageWrapper.css';
 import ProfilePageContainer from './ProfilePage/ProfilePageContainer';
 import DialogsContainer from './Dialogs/DialogsContainer';
@@ -29,6 +30,9 @@ function PageWrapper(props) {
 					/>
 					<Route path='/login' element={
 						<LoginPage />
+					} />
+					<Route path='/register' element={
+						<RegisterPage />
 					} />
 				</Routes>
 		      </div>
