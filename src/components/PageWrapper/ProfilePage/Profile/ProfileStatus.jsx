@@ -2,7 +2,7 @@ import './Profile.css';
 import React from 'react';
 
 class StatusProfile extends React.PureComponent{
-    
+
 
     state = {
         editMode: false,
@@ -14,11 +14,11 @@ class StatusProfile extends React.PureComponent{
         if (this.props.isMyOwn){
             this.setState({editMode: true})
         }
-    } 
+    }
     offEditMode = () => {
         this.setState({editMode: false})
         this.props.updateStatus(this.state.status)
-    } 
+    }
 
 
     onStatusChange = (e) =>{
@@ -34,9 +34,9 @@ class StatusProfile extends React.PureComponent{
     render(){
         return (
             <div className="status">
-                {!this.state.editMode 
+                {!this.state.editMode
                 ?<div className='status__text' onDoubleClick={this.onEditMode}>
-                    {this.props.statusText || "no status"}
+                    {this.state.status || "no status"}
                 </div>
                 :<div className="stutus__edit">
                     <input className='status__edit-input' onChange={this.onStatusChange} value={this.state.status} type="text" onBlur={this.offEditMode} autoFocus={true} />
@@ -45,7 +45,7 @@ class StatusProfile extends React.PureComponent{
             </div>
         )
     }
-} 
+}
 
 
 export default StatusProfile;

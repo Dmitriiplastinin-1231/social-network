@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { displayUserProfile, getStatus,updateStatus, savePhoto } from '../../../redux-toolkit/slices/profileSlice';
+import { displayUserProfile, updateStatus, savePhoto, updateProfileData } from '../../../redux-toolkit/slices/profileSlice';
 import ProfilePage from './ProfilePage';
 import { withNavigate } from '../../../hoc/withNavigateFunction';
 import { withParams } from '../../../hoc/withParams';
+import { withAuthRedirect } from '../../../hoc/withAuthRedirect';
 import { compose } from 'redux';
 import { profileSelectors, authSelectors } from '../../../redux-toolkit/selectors';
 
@@ -21,9 +22,11 @@ class ProfilePageContainer extends React.Component{
             this.props.param.userId = this.props.authorizedId;
             this.isMyOwn = true;
         }
+        if (this.props.param.userId === this.props.authorizedId) {
+            this.isMyOwn = true;
+        }
 
         this.props.displayUserProfile(this.props.param.userId)
-        this.props.getStatus(this.props.param.userId)
     }
 
     componentDidMount(){
@@ -44,6 +47,7 @@ class ProfilePageContainer extends React.Component{
             updateStatus={this.props.updateStatus}
             savePhoto={this.props.savePhoto}
             isMyOwn={this.isMyOwn}
+            updateProfileData={this.props.updateProfileData}
         />
     }
 }
@@ -51,14 +55,13 @@ class ProfilePageContainer extends React.Component{
 
 let mapStateToProps = (state) => ({
     profile: profileSelectors.getProfile(state),
-    status: profileSelectors.getStatus(state),
     authorizedId: authSelectors.getAuthorizedId(state),
     isAuth: authSelectors.getIsAuth(state)
 })
 
 export default compose(
-    connect(mapStateToProps, {displayUserProfile, updateStatus, getStatus, savePhoto}),
+    connect(mapStateToProps, {displayUserProfile, updateStatus, savePhoto, updateProfileData}),
     withParams,
-    withNavigate
-    // withAuthRedirect
+    withNavigate,
+    withAuthRedirect
 )(ProfilePageContainer)

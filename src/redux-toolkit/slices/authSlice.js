@@ -25,27 +25,41 @@ const authSlice = createSlice({
 });
 
 export const AuthMe = () => async (dispatch) => {
-    const response = await authApi.authMe();
-    if (response.resultCode == 0) {
-        let { id, login, email } = response.data;
-        dispatch(setAuthData({ id, login, email, isAuth: true}))
-    };
+    try {
+        const response = await authApi.authMe();
+        const { userId, name, email } = response;
+        if (userId && name && email) {
+            dispatch(setAuthData({ id: userId, login: name, email, isAuth: true}))
+        };
+    } catch (err) {
+        console.log(err);
+    }
+
 };
+
+export const register = (name, email, password, rememberMe) => async (dispatch) => {
+    const response = await authApi.register(name, email, password, rememberMe);
+
+    if (!response) {
+        dispatch(AuthMe());
+    }
+}
 
 export const login = (email, password, rememberMe) => async (dispatch) => {
-    const response = await authApi.login(email, password, rememberMe);
-    if (response.resultCode === 0) {
-        dispatch(AuthMe());
-    } else {
-        dispatch(stopSubmit('login', { _error: 'Incorect login or password' }))
-    }
+        const response = await authApi.login(email, password, rememberMe);
+        if (!response) {
+            dispatch(AuthMe());
+        } else {
+            dispatch(stopSubmit('login', { _error: 'Incorect login or password' }))
+        }
+
+
 };
 
-export const logout = () => async (dispatch) => {
-    const response = await authApi.logout();
-    if (response.resultCode === 0) {
-        dispatch(setAuthData({ id: null, login: null, email: null, isAuth: false}))
-    };
+export const logout = () => (dispatch) => {
+    const response = authApi.logout();
+    dispatch(setAuthData({ id: null, login: null, email: null, isAuth: false}))
+
 };
 
 export var { setAuthData } = authSlice.actions;

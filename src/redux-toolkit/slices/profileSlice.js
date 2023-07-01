@@ -8,7 +8,6 @@ const initialState = {
         { id: 3, message: 'Как довести читателя до этой важной части, ради которой, собственно и затевалась вся история?' }
     ],
     profile: null,
-    status: ''
 };
 
 const profileSlice = createSlice({
@@ -26,7 +25,7 @@ const profileSlice = createSlice({
             state.profile = action.payload;
         },
         setUserStatus: (state, action) => {
-            state.status = action.payload;
+            state.profile.status = action.payload;
         },
         savePhotoSuccess: (state, action) => {
             state.profile = { ...state.profile, ...action.payload };
@@ -36,17 +35,30 @@ const profileSlice = createSlice({
 
 export const displayUserProfile = (userId) => async dispatch => {
     let response = await profileApi.setProfile(userId);
-    dispatch(setUserProfile(response));
-};
-
-export const getStatus = (userId) => async dispatch => {
-    let response = await profileApi.getStatus(userId)
-    dispatch(setUserStatus(response))
+    response.photos = {}
+    if (!response.message) {
+        dispatch(setUserProfile(response));
+    } else {
+        console.log(response.message);
+    }
 };
 
 export const updateStatus = (status) => async dispatch => {
-    let response = await profileApi.updateStatus(status)
-    response.resultCode === 0 && dispatch(setUserStatus(status))
+    let response = await profileApi.updateStatus(status);
+    if (response.message === 'Status Update') {
+        dispatch(setUserStatus(response.status));
+    } else {
+        console.log(response.message);
+    };
+};
+
+export const updateProfileData = (data) => async dispatch => {
+    let response = await profileApi.updateProfileData(data);
+    if (response.message === 'Set data successful') {
+        dispatch(setUserProfile(response.user));
+    } else {
+        console.log(response.message)
+    }
 };
 
 export const savePhoto = photo => async dispatch => {

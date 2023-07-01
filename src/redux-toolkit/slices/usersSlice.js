@@ -50,7 +50,7 @@ export const setUsers = (pageSize, pageNumber = 1) => async (dispatch) => {
     let response = await userApi.getUsers(pageNumber, pageSize)
     dispatch(toggleIsFetching(false));
     dispatch(setUsersCount(response.totalCount));
-    dispatch(addUsers(response.items));
+    dispatch(addUsers(response));
 };
 
 export const toggleFollow = (user, followStatus) => async (dispatch) => {

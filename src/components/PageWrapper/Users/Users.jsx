@@ -38,7 +38,7 @@ let Users = (props) => {
                     return <User
                     user={user}
                     toggleFollow={props.toggleFollow}
-                    key={user.id}
+                    key={user.userId}
                     isFollowingProgress={props.isFollowingProgress}
                 />
             })}

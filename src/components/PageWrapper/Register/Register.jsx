@@ -3,14 +3,18 @@ import { Field, reduxForm } from 'redux-form';
 import { maxLength30, required, confirmPassword } from '../../../utilities/validation/validation';
 import { FormInput } from '../../common/FormsControl/FormsControl';
 import { connect } from 'react-redux';
-import { login } from '../../../redux-toolkit/slices/authSlice';
+import { register } from '../../../redux-toolkit/slices/authSlice';
 import { Navigate, Link } from 'react-router-dom';
 
 const RegisterForm = (props) => {
     return(
-        <form className={`${s.form} ${props.error && s.form__error}`} onSubmit={ props.handleSubmit } action="#">
+        <form className={`${s.form} ${props.error && s.form__error}`} onSubmit={props.handleSubmit} action="#">
             <label className={s.label}>
-                User name or email adress *
+                Your name *
+                <Field className={s.input} type="text" component={FormInput} name='name' validate={[required, maxLength30]} />
+            </label>
+            <label className={s.label}>
+                Email adress *
                 <Field className={s.input} type="text" component={FormInput} name='email' validate={[required, maxLength30]} />
             </label>
             <label className={s.label}>
@@ -43,8 +47,8 @@ const LoginReduxForm = reduxForm({form: 'register'})(RegisterForm);
 
 
 const RegisterPage = (props) => {
-    const onSubmit = ({email, password, rememberMe}) => {
-        props.login(email, password, rememberMe)
+    const onSubmit = ({name, email, password, rememberMe}) => {
+        props.register(name, email, password, rememberMe)
     }
     if (props.isAuth) {
         return <Navigate to={'/profile'} />
@@ -62,6 +66,6 @@ const mapStateToProps = (state) => ({
     isAuth: state.auth.isAuth
 })
 
-const RegisterPageContainer = connect(mapStateToProps, { login })(RegisterPage)
+const RegisterPageContainer = connect(mapStateToProps, { register })(RegisterPage)
 
 export default RegisterPageContainer;
