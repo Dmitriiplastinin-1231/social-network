@@ -32,7 +32,9 @@ function Dialogs(props){
         return <Message message={message.message} key={message.id}/>
     });
 
-
+    React.useEffect(() => {
+        document.title = 'Сообщения';
+    },[])
 
     const onSubmit = (data) => {
         props.addMessage(data.messageText)

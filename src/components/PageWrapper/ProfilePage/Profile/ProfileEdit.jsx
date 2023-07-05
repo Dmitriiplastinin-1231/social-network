@@ -1,6 +1,9 @@
 import { reduxForm, Field } from 'redux-form';
+import { ProfileFormSelect } from '../../../common/FormsControl/FormsControl';
+import { profileSexError } from '../../../../utilities/validation/validation';
 
 const ProfileEditForm = (props) => {
+
     return (
         <form className='profile__edit-form' onSubmit={ props.handleSubmit } >
             <div className="profile__edit-formtitle">
@@ -17,14 +20,12 @@ const ProfileEditForm = (props) => {
                 <Field className='profile__edit-field' type='text' component={'input'} name='github' placeholder='Ссылка на github' />
                 <Field className='profile__edit-field' type='text' component={'input'} name='vk' placeholder='Ссылка на vk' />
             </label>
-            <label className='profile__edit-label'>
-                <Field className='profile__edit-field' type='text' component={'select'} name='sex'>
-                    <option>*не указано*</option>
-                    <option value='man'>Парень</option>
-                    <option value='women'>Девушка</option>
-                    <option>Другое</option>
-                </Field>
+            <label className='profile__edit-label profile__edit-selectlabel'>
+                <Field className='profile__edit-field' type='text' component={ProfileFormSelect} name='sex' validate={profileSexError} />
+
             </label>
+
+
             {/* <label className="profile__edit-buttonlabel"> */}
                 <button className="profile__edit-formbutton" type='submit'>Изменить</button>
             {/* </label> */}

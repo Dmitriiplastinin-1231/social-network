@@ -5,6 +5,7 @@ import { FormInput } from '../../common/FormsControl/FormsControl';
 import { connect } from 'react-redux';
 import { register } from '../../../redux-toolkit/slices/authSlice';
 import { Navigate, Link } from 'react-router-dom';
+import React from 'react';
 
 const RegisterForm = (props) => {
     return(
@@ -47,6 +48,9 @@ const LoginReduxForm = reduxForm({form: 'register'})(RegisterForm);
 
 
 const RegisterPage = (props) => {
+    React.useEffect(() => {document.title = 'Регистрация'}, []);
+
+
     const onSubmit = ({name, email, password, rememberMe}) => {
         props.register(name, email, password, rememberMe)
     }

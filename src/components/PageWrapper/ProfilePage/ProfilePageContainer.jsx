@@ -30,7 +30,8 @@ class ProfilePageContainer extends React.Component{
     }
 
     componentDidMount(){
-        this.refreshProfile()
+        this.refreshProfile();
+        document.title = 'Профиль';
     }
 
     componentDidUpdate(prevProps) {
@@ -43,7 +44,6 @@ class ProfilePageContainer extends React.Component{
 
         return <ProfilePage {...this.props}
             profile={this.props.profile}
-            status={this.props.status}
             updateStatus={this.props.updateStatus}
             savePhoto={this.props.savePhoto}
             isMyOwn={this.isMyOwn}

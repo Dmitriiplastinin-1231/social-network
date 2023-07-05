@@ -7,10 +7,25 @@
   align-items: center;
   height: 48px;
 }
+
 .logo{
   height: 35px;
-  margin-left: 15px;
+  margin-left: 30px;
+	padding-right: 15px;
+  display: inline-block;
+  font-family: monospace;
+  font-size: 35px;
+  color: #5982e1;
+  font-weight: 800;
 }
+
+.logo span {
+	font-size: 20px;
+  color: #b667e7;
+  letter-spacing: -12px;
+  font-weight: 600;
+}
+
 .auth{
   height: 100%;
   display: flex;
@@ -37,7 +52,7 @@
 }
 .auth__menu-item{
   width: 100%;
-  
+
 }
 .auth__menu-button{
   padding: 10px 15px;

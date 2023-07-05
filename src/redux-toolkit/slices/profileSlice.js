@@ -1,27 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { profileApi } from "../../api/api";
+import { postApi, profileApi } from "../../api/api";
 
 const initialState = {
-    posts: [
-        { id: 1, message: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.' },
-        { id: 2, message: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum  печати и вэб-дизайне является стандартной "рыбой" для текстов на латинице с начала XVI века.' },
-        { id: 3, message: 'Как довести читателя до этой важной части, ради которой, собственно и затевалась вся история?' }
-    ],
-    profile: null,
+    profile: {},
 };
 
 const profileSlice = createSlice({
     name: 'profilePage',
     initialState,
     reducers: {
-        addPost: (state, action) => {
+        setPost: (state, action) => {
             const newPost = {
-                id: 5,
-                message: action.payload
+                id: action.payload.id,
+                text: action.payload.text,
+                title: action.payload.title
             };
-            state.posts.unshift(newPost);
+            state.profile.posts.unshift(newPost);
         },
         setUserProfile: (state, action) => {
+            action.payload.posts = action.payload.posts.reverse();
             state.profile = action.payload;
         },
         setUserStatus: (state, action) => {
@@ -29,6 +26,14 @@ const profileSlice = createSlice({
         },
         savePhotoSuccess: (state, action) => {
             state.profile = { ...state.profile, ...action.payload };
+        },
+        setUpdatePost: (state, action) => {
+            const post = state.profile.posts.find(post => post.id === action.payload.id);
+            post.title = action.payload.title;
+            post.text = action.payload.text;
+        },
+        postDeleted: (state, action) => {
+            state.profile.posts = state.profile.posts.filter(post => post.id !== action.payload);
         }
     }
 });
@@ -58,7 +63,7 @@ export const updateProfileData = (data) => async dispatch => {
         dispatch(setUserProfile(response.user));
     } else {
         console.log(response.message)
-    }
+    };
 };
 
 export const savePhoto = photo => async dispatch => {
@@ -67,9 +72,43 @@ export const savePhoto = photo => async dispatch => {
     response.resultCode === 0 && dispatch(savePhotoSuccess(response.data));
 };
 
-export var { addPost,
+export const addPost = (title, text) => async dispatch => {
+    let response = await postApi.createPost(title, text);
+
+    if (response.message === 'Post was seccessfully created') {
+        const { id, title, text } = response.post;
+        dispatch(setPost({ id, title, text }));
+    } else {
+        console.log(response.message, response.error);
+    };
+};
+
+export const updatePost = (data, id) => async dispatch => {
+    let response = await postApi.editPost(data, id);
+
+    if (response.message === 'Post edited') {
+        dispatch(setUpdatePost({ ...data, id }));
+    } else {
+        console.log(response.message, response.error);
+    };
+};
+
+export const deletePost = (id) => async dispatch => {
+    let response = await postApi.deletePost(id);
+
+    if (response.message === 'Post deleted') {
+        dispatch(postDeleted(id));
+    } else {
+        console.log(response.message, response.error);
+    };
+};
+
+export var {
+    setPost,
+    postDeleted,
     setUserProfile,
     setUserStatus,
-    savePhotoSuccess
+    savePhotoSuccess,
+    setUpdatePost
 } = profileSlice.actions;
 export default profileSlice.reducer;

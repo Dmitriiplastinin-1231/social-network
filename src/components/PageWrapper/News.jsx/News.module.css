@@ -1,0 +1,14 @@
+.news__inner{
+    margin-top: 30px;
+}
+.title{
+    margin: 10px 0 15px 5px;
+    font-size: 18px;
+    font-weight: 600;
+    word-break: break-all;
+}
+.text{
+    margin-bottom: 10px;
+    margin-left: 5px;
+    word-break: break-all;
+}

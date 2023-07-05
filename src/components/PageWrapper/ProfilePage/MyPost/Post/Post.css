@@ -3,4 +3,26 @@
   background-color: #e6f5fd;
   padding: 10px;
   margin-bottom: 20px;
+  position: relative;
+}
+.post__item-text,
+.post__item-title{
+  word-break: break-all;
+  font-size: 16px;
+  width: 100%;
+  height: 100%;
+  display: block;
+  resize: none;
+  background-color: transparent;
+  border: none;
+  outline: 0px solid transparent;
+  margin-top: 21.28px;
+}
+.post__item-title{
+  /* padding-right: 70px; */
+  font-weight: 700;
+}
+.post__item-textarea{
+  display: inline-table;
+  line-height: 14px;
 }

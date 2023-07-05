@@ -26,7 +26,7 @@ export const followApi = {
 export const authApi = {
     authMe() {
         return instanse.get('profile/')
-            .then(response => response.data );
+            .then(response => response.data);
 
     },
     login(email, password, rememberMe=false){
@@ -43,26 +43,56 @@ export const authApi = {
 }
 
 export const profileApi = {
-    setProfile(userId){
+    setProfile(userId) {
         return axios.get(baseURL + 'profile/' + userId)
             .then(response => response.data);
     },
-    updateStatus(status){
+    updateStatus(status) {
         return instanse.put('profile/status', { status })
             .then(response => response.data);
     },
     updateProfileData(data) {
         return instanse.put('profile/edit', data)
             .then(response => response.data);
+    },
+
+    //     setPhoto(Photo){
+    //         const photoData = new FormData()
+    //         photoData.append('image', Photo)
+    //         return instanse.put('profile/photo', photoData, {
+    //                 headers: {
+    //                     'Content-Type': 'multipart/form-data'
+    //                 }
+    //             })
+    //             .then(response => response.data)
+    //     }
+};
+
+
+export const postApi = {
+    // get all posts
+    getAllPosts() {
+        return axios.get(baseURL + 'post/')
+            .then(response => response.data);
+    },
+    // get posts one user
+    getUserPosts(userId) {
+        return axios.get(baseURL + 'post/' + userId)
+            .then(response => response.data);
+    },
+    // creates post
+    createPost(title, text) {
+        return instanse.post('post/create', { title, text })
+            .then(response => response.data);
+    },
+    // edits post
+    editPost(data, id) {
+        return instanse.put('post/edit', { data, id })
+            .then(response => response.data);
+    },
+    // deletes post
+    deletePost(id) {
+        return instanse.delete('post/delete', { data: {id} })
+            .then(response => response.data);
     }
-//     setPhoto(Photo){
-//         const photoData = new FormData()
-//         photoData.append('image', Photo)
-//         return instanse.put('profile/photo', photoData, {
-//                 headers: {
-//                     'Content-Type': 'multipart/form-data'
-//                 }
-//             })
-//             .then(response => response.data)
-//     }
 }

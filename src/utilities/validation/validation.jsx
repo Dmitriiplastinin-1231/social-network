@@ -17,3 +17,8 @@ const maxLengthCreator = (length) => {
 
 export const maxLength15 = maxLengthCreator(15);
 export const maxLength30 = maxLengthCreator(30);
+
+export const profileSexError = value => {
+
+    return value !== 'Другое' ? undefined : 'Еблан?';
+}

@@ -8,7 +8,8 @@ import { userSelectors } from '../../../redux-toolkit/selectors';
 class UsersAPIComponent extends React.Component {
 
     componentDidMount(){
-        this.props.setUsers(this.props.pageSize)
+        this.props.setUsers(this.props.pageSize);
+        document.title = 'Пользователи'
     }
 
     onPageChanged = (pageNumber) => {

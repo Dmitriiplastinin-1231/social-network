@@ -6,6 +6,7 @@ import ProfilePageContainer from './ProfilePage/ProfilePageContainer';
 import DialogsContainer from './Dialogs/DialogsContainer';
 import {Navigate, Route, Routes} from 'react-router-dom';
 import UsersContainer from './Users/UsersContainer';
+import NewsContainer from './News.jsx/NewsContainer';
 
 
 function PageWrapper(props) {
@@ -33,6 +34,9 @@ function PageWrapper(props) {
 					} />
 					<Route path='/register' element={
 						<RegisterPage />
+					} />
+					<Route path='/news' element={
+						<NewsContainer />
 					} />
 				</Routes>
 		      </div>

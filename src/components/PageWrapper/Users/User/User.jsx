@@ -14,7 +14,7 @@ let User = (props) => {
         <article className={`${s.user} ${props.user.sex==='women'?s.w:props.user.sex==='man'?s.m: ''}`}>
             <div className={s.left}>
                 <div className={s.left__item}>
-                    <NavLink to={'/profile/' + props.user.id}>
+                    <NavLink to={'/profile/' + props.user.userId}>
                         <img className={s.avatar} src={props.user.photo != null? props.user.photo : userPhoto} alt="avatar" />
                     </NavLink>
                     {props.user.followed?

@@ -1,4 +1,5 @@
 import s from './LoginPage.module.css';
+import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { maxLength30, required } from '../../../utilities/validation/validation';
 import { FormInput } from '../../common/FormsControl/FormsControl';
@@ -39,6 +40,9 @@ const LoginReduxForm = reduxForm({form: 'login'})(LoginForm);
 
 
 const LoginPage = (props) => {
+
+    React.useEffect(() => {document.title = 'Авторизация'}, []);
+
     const onSubmit = ({email, password, rememberMe}) => {
         props.login(email, password, rememberMe)
     }

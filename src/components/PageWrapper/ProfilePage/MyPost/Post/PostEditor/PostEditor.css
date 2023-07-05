@@ -1,0 +1,30 @@
+.post__editor{
+    position: absolute;
+    right: 12px;
+    top: 2px;
+    padding: 5px;
+    background-color: rgba(255, 255, 255, .9);
+    border-radius: 5px;
+  }
+  .post__editor-inner{
+    display: none;
+  }
+  .post__editor-inner.active{
+    display: block;
+  }
+  .post__editor-arrow{
+    transition: transform .3s;
+  }
+  .post__editor-arrow.active{
+    transform: rotate(-180deg);
+  }
+  .post__editor-button{
+    display: block;
+    margin-top: 3px;
+  }
+  .post__editor-arrow,
+  .post__editor-button svg{
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+  }
