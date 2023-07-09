@@ -29,7 +29,7 @@ class ProfilePageContainer extends React.Component{
         this.props.displayUserProfile(this.props.param.userId)
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.refreshProfile();
         document.title = 'Профиль';
     }

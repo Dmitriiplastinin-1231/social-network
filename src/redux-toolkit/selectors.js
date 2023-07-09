@@ -15,3 +15,6 @@ export const authSelectors = {
     getAuthorizedId: (state) => state.auth.id,
     getIsAuth: (state) => state.auth.isAuth
 }
+export const dialogSelectors = {
+    getDialogState: (state) => state.messagesPage
+}

@@ -20,7 +20,7 @@ function PageWrapper(props) {
 					<Route path='/' element={
 						<Navigate to='/profile' />
 					}/>
-					<Route path="/messages/*" element={
+					<Route path="/messages/:userId?" element={
 						<DialogsContainer />}
 					 />
 					<Route path={'/profile/:userId?' } element={

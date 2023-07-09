@@ -1,9 +1,10 @@
 import s from './Dialogs.module.css';
 import DialogItem from './DialogItem/DialogItem';
-import Message from './Message/Message';
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { required } from '../../../utilities/validation/validation';
+import MessagesContainer from './Messages/MessagesContainer';
+
 
 const DialogForm = (props) => {
     return (
@@ -24,20 +25,21 @@ const DialogForm = (props) => {
 function Dialogs(props){
 
 
-    let dialogsElements = props.messagesPage.dialogList.map(person => {
-        return <DialogItem name={person.name} key={person.id} id={person.id} />
+    let dialogsElements = props.dialogList.map(person => {
+        return <DialogItem name={person.name} key={person.userId} id={person.userId} />
     });
 
-    let messageElements = props.messagesPage.messages.map(message => {
-        return <Message message={message.message} key={message.id}/>
-    });
+    // let messageElements = props.messagesPage.messages.map(message => {
+        // return <Message message={message.text} id={message.id} addresseeId={message.addresseeId} sender={message.sender} key={message.id}/>
+    // });
 
     React.useEffect(() => {
         document.title = 'Сообщения';
     },[])
 
     const onSubmit = (data) => {
-        props.addMessage(data.messageText)
+        props.sendMessage(data.messageText, props.param.userId);
+
     }
 
 
@@ -47,15 +49,16 @@ function Dialogs(props){
                 {dialogsElements}
             </div>
             <div className={s.messages}>
+                {/* {messageElements} */}
+                <MessagesContainer />
                 <DialogReduxForm onSubmit={onSubmit} />
-                {messageElements}
             </div>
         </div>
     );
 }
 
 
-const DialogReduxForm = reduxForm({form: 'dialog'})(DialogForm)
+var DialogReduxForm = reduxForm({form: 'dialog'})(DialogForm)
 
 
 export default Dialogs;

@@ -51,6 +51,14 @@
   justify-content: center;
   align-items: center;
 }
+.profile__right-buttons{
+  margin-bottom: 5px;
+}
+.profile__right-buttons svg{
+  width: 25px;
+  height: 25px;
+  margin-left: 3px;
+}
 .profile__img-editor{
   width: 0;
   height: 0;
@@ -73,7 +81,7 @@
   justify-content: space-evenly;
 }
 .profile__edit-button{
-  margin: 10px 20px 0 0;
+  margin: 10px 20px 5px 0;
 }
 .profile__edit-button.active img{
   transform: rotate(45deg);

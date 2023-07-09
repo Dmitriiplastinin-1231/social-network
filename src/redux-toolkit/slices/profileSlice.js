@@ -18,7 +18,12 @@ const profileSlice = createSlice({
             state.profile.posts.unshift(newPost);
         },
         setUserProfile: (state, action) => {
-            action.payload.posts = action.payload.posts.reverse();
+            if (action.payload.posts) {
+                action.payload.posts = action.payload.posts.reverse();
+            }
+            if (!action.payload.posts) {
+                action.payload.posts = state.profile.posts;
+            }
             state.profile = action.payload;
         },
         setUserStatus: (state, action) => {

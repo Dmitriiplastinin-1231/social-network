@@ -1,49 +1,74 @@
-.dialogs{
+.dialogs {
     display: flex;
     margin-top: 30px;
 }
-.dialogs__inner{
+.dialogs__inner {
     padding: 0 15px;
     flex-basis: 25%;
     border-left: 1px solid #3537b4;
 }
-.dialog{
+.dialog {
     color: #555;
     margin-bottom: 4px;
     border-radius: 8px;
 }
-.dialog a{
+.dialog a {
     padding: 10px;
     color: inherit;
 }
-.dialog.active{
+.dialog.active {
     font-weight: 700;
     color: #fff;
     background-color: #3585b4;
 }
-.dialog:hover{
+.dialog:hover {
     background-color: #e9f4fa;
 }
-.messages{
+.messages {
     flex-basis: 75%;
     order: -1;
     min-height: calc(100vh - 108px);
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
+    justify-content: flex-end;
 }
-.form{
+.form {
     width: 99%;
     margin-top: 20px;
     border-top: 1px solid #3537b4;
     padding-top: 15px;
     display: flex;
 }
-.message{
-    padding: 10px;
+.message {
+    padding: 10px 10px 20px;
     border-radius: 5px;
     border: 2px solid #ffcdc8;
     margin-right: 20px;
 }
-.message + .message{
+.message + .message {
     margin-bottom: 10px;
+}
+.message__inner{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.message__text {
+    margin-left: 15px;
+    font-size: 16px;
+}
+.message__button {
+    margin-left: 5px;
+}
+.message__button svg{
+    width: 18px;
+    height: 18px;
+}
+.message__textarea {
+    display: inline-table;
+    line-height: 5px;
+    padding: 0;
+    border: none;
+    outline-color: transparent;
+    width: calc(100% - 15px);
 }

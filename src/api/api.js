@@ -96,3 +96,33 @@ export const postApi = {
             .then(response => response.data);
     }
 }
+
+export const messageApi = {
+    // get correspondence with one user;
+    getCorrespondence(userId) {
+        return instanse.get('message/' + userId)
+            .then(response => response.data);
+    },
+    // get interlocutors
+    getInterlocutors() {
+        return instanse.get('message/interlocutors/')
+            .then(response => response.data);
+    },
+    // sends message
+    sendMessage(text, userId) {
+        return instanse.post('message/send/' + userId, { text })
+            .then(response => response.data);
+    },
+    // edits message
+    editMessage(text, messageId) {
+        return instanse.put('message/edit/' + messageId, { text })
+            .then(response => response.data);
+    },
+    // delets message
+    deleteMessage(messageId) {
+        debugger
+        return instanse.delete('message/delete/' + messageId)
+            .then(response => response.data);
+    }
+
+}

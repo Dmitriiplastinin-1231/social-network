@@ -1,22 +1,39 @@
 import { compose } from 'redux';
 import { withAuthRedirect } from '../../../hoc/withAuthRedirect';
-import { addMessage } from '../../../redux-toolkit/slices/dialogSlice';
+import { sendMessage, getInterlocutors } from '../../../redux-toolkit/slices/dialogSlice';
 import Dialogs from './Dialogs'
 import { connect } from 'react-redux';
+import React from 'react';
+import { withParams } from '../../../hoc/withParams';
+import { dialogSelectors } from '../../../redux-toolkit/selectors';
 
+
+class DialogsContainer extends React.Component{
+
+    componentDidMount() {
+        this.props.getInterlocutors();
+    }
+
+    render() {
+        return (
+            <Dialogs {...this.props} />
+        )
+    }
+}
 
 
 let mapStateToProps = (state) => {
     return {
-        messagesPage: state.messagesPage,
+        dialogList: dialogSelectors.getDialogState(state).dialogList,
         isAuth: state.auth.isAuth,
         MyId: state.auth.id
     }
 }
 
 export default compose(
-    connect(mapStateToProps, { addMessage }),
-    withAuthRedirect
-)(Dialogs)
+    connect(mapStateToProps, { sendMessage, getInterlocutors }),
+    withAuthRedirect,
+    withParams
+)(DialogsContainer)
 
 // export default DialogsConsumer;

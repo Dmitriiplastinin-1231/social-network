@@ -5,6 +5,7 @@ import Status from './ProfileStatus';
 import usetPhoto from '../../../../assets/images/avatar.jpeg';
 import loader from '../../../../assets/images/loader.svg';
 import ProfileEdit from './ProfileEdit';
+import { NavLink } from 'react-router-dom';
 
 function Profile(props) {
 
@@ -91,14 +92,21 @@ function Profile(props) {
               </ul>
             </div> */}
           </div>
-          {props.isMyOwn &&
-            <div className="profile__descr-right">
+
+          <div className="profile__descr-right">
+            {props.isMyOwn &&
               <div className="profile__edit">
-                <button className={`profile__edit-button ${editMode ? 'active' : ''}`} onClick={editModeChange}><img className='profile__edit-img' src={loader} alt="editMenu" /></button>
+                <button className={`profile__right-buttons profile__edit-button ${editMode ? 'active' : ''}`} onClick={editModeChange}><img className='profile__edit-img' src={loader} alt="editMenu" /></button>
                 {editMode && <ProfileEdit updateProfileData={props.updateProfileData} closeEdit={editModeChange} />}
               </div>
-            </div>
-          }
+            }
+            <NavLink className='profile__right-buttons' to={'../messages/' + props.profile.userId}>
+              <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" fill='#317fe7'>
+                <path d="M64 0C28.7 0 0 28.7 0 64V352c0 35.3 28.7 64 64 64h96v80c0 6.1 3.4 11.6 8.8 14.3s11.9 2.1 16.8-1.5L309.3 416H448c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H64z" />
+              </svg>
+            </NavLink>
+          </div>
+
         </div>
       </div>
     </article>
