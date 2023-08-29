@@ -25,9 +25,10 @@ const DialogForm = (props) => {
 function Dialogs(props){
 
 
-    let dialogsElements = props.dialogList.map(person => {
-        return <DialogItem name={person.name} key={person.userId} id={person.userId} />
+    var dialogsElements = props.dialogList.map(person => {
+        return <DialogItem name={person.name} id={person.userId} key={person.userId}/>
     });
+
 
     // let messageElements = props.messagesPage.messages.map(message => {
         // return <Message message={message.text} id={message.id} addresseeId={message.addresseeId} sender={message.sender} key={message.id}/>

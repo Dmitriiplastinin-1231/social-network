@@ -1,6 +1,7 @@
 import s from './../Users.module.css';
 import userPhoto from './../../../../assets/images/avatar.jpeg';
 import { NavLink } from 'react-router-dom';
+import { baseURL } from '../../../../api/api';
 
 let User = (props) => {
     let follow = () => {
@@ -15,7 +16,7 @@ let User = (props) => {
             <div className={s.left}>
                 <div className={s.left__item}>
                     <NavLink to={'/profile/' + props.user.userId}>
-                        <img className={s.avatar} src={props.user.photo != null? props.user.photo : userPhoto} alt="avatar" />
+                        <img className={s.avatar} src={props.user.photo? baseURL + props.user.photo : userPhoto} alt="avatar" />
                     </NavLink>
                     {props.user.followed?
                         <button className={`${s.followBtn} ${s.active}`} disabled={props.isFollowingProgress.some(id => id === props.user.id)} onClick={unfollow}>follow</button>:

@@ -5,13 +5,7 @@ let initialState = {
     messages: [
 
     ],
-    dialogList: [
-        { id: 'f1ad1396-b448-4aa8-b966-79df56b01763', name: 'Dmitriy Plastinin' },
-        { id: '3a9622c3-11b5-4952-b3ae-15629209fcdf', name: 'Daniil Belyaev' },
-        { id: 3, name: 'Liza Saushkina' },
-        { id: 4, name: 'Sasha Artimiev' },
-        { id: 5, name: 'Egor Shinkoe' }
-    ]
+    dialogList: []
 };
 
 const dialogSlice = createSlice({

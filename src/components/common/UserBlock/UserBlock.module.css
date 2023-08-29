@@ -4,6 +4,7 @@
 .userblock__img{
   width: 55px;
   height: 55px;
+  object-fit: contain;
   margin-right: 3px;
   border-radius: 50%;
 }

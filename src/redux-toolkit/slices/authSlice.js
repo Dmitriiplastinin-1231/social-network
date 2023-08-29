@@ -48,6 +48,7 @@ export const register = (name, email, password, rememberMe) => async (dispatch) 
 export const login = (email, password, rememberMe) => async (dispatch) => {
         const response = await authApi.login(email, password, rememberMe);
         if (!response) {
+            debugger
             dispatch(AuthMe());
         } else {
             dispatch(stopSubmit('login', { _error: 'Incorect login or password' }))
@@ -57,9 +58,8 @@ export const login = (email, password, rememberMe) => async (dispatch) => {
 };
 
 export const logout = () => (dispatch) => {
-    const response = authApi.logout();
+    authApi.logout();
     dispatch(setAuthData({ id: null, login: null, email: null, isAuth: false}))
-
 };
 
 export var { setAuthData } = authSlice.actions;

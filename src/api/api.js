@@ -1,6 +1,6 @@
 import * as axios from 'axios';
 
-const baseURL = 'http://localhost:8000/';
+export const baseURL = 'http://localhost:8000/';
 
 const instanse = axios.create({withCredentials: true, baseURL})
 
@@ -31,7 +31,7 @@ export const authApi = {
     },
     login(email, password, rememberMe=false){
         return instanse.post('profile/login', { email, password })
-            .then(response => response.data);
+            .then(response => { debugger; return response.data});
     },
     register(name, email, password) {
         return instanse.post('profile/register', { email, name, password })
@@ -56,16 +56,17 @@ export const profileApi = {
             .then(response => response.data);
     },
 
-    //     setPhoto(Photo){
-    //         const photoData = new FormData()
-    //         photoData.append('image', Photo)
-    //         return instanse.put('profile/photo', photoData, {
-    //                 headers: {
-    //                     'Content-Type': 'multipart/form-data'
-    //                 }
-    //             })
-    //             .then(response => response.data)
-    //     }
+    setPhoto(Photo) {
+        const photoData = new FormData();
+        console.log(photoData)
+        photoData.append('profilePhoto', Photo)
+        return instanse.put('profile/photo', photoData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            .then(response => response.data)
+    }
 };
 
 

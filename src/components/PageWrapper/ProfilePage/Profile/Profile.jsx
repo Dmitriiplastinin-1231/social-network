@@ -6,6 +6,7 @@ import usetPhoto from '../../../../assets/images/avatar.jpeg';
 import loader from '../../../../assets/images/loader.svg';
 import ProfileEdit from './ProfileEdit';
 import { NavLink } from 'react-router-dom';
+import { baseURL } from '../../../../api/api';
 
 function Profile(props) {
 
@@ -45,7 +46,7 @@ function Profile(props) {
       <img className='profile__background' src='https://abrakadabra.fun/uploads/posts/2022-01/1643104370_23-abrakadabra-fun-p-estetika-rossii-oboi-38.jpg' alt='profile background'></img>
       <div className='profile__inner'>
         <div className="profile__img-box">
-          <img className='profile__img' src={props.profile.photo || usetPhoto} alt='profilephoto'></img>
+          <img className='profile__img' src={props.profile.photo? baseURL + props.profile.photo : usetPhoto} alt='profilephoto'></img>
           {props.isMyOwn &&
             <div className="profile__img-hover">
               <label className="profile__img-label">

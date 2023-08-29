@@ -22,7 +22,6 @@ const ProfileEditForm = (props) => {
             </label>
             <label className='profile__edit-label profile__edit-selectlabel'>
                 <Field className='profile__edit-field' type='text' component={ProfileFormSelect} name='sex' validate={profileSexError} />
-
             </label>
 
 
@@ -38,11 +37,12 @@ const ProfileReduxEditForm = reduxForm({form: 'profileEdit'})(ProfileEditForm)
 
 const ProfileEdit = ({ closeEdit, updateProfileData }) => {
     const onSubmit = (data) => {
+        let updateData = {...data};
         if (data.age) {
-            data.age = +data.age;
-        }
+            updateData.age = +data.age;
+        };
 
-        updateProfileData(data);
+        updateProfileData(updateData);
     }
 
     return (
