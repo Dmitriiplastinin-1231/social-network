@@ -52,7 +52,11 @@ export const profileApi = {
             .then(response => response.data);
     },
     updateProfileData(data) {
-        return instanse.put('profile/edit', data)
+        return instanse.put('profile/edit', data, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
             .then(response => response.data);
     },
 
@@ -61,6 +65,17 @@ export const profileApi = {
         console.log(photoData)
         photoData.append('profilePhoto', Photo)
         return instanse.put('profile/photo', photoData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            .then(response => response.data)
+    },
+    setBg(Photo) {
+        const photoData = new FormData();
+        console.log(photoData)
+        photoData.append('bg', Photo)
+        return instanse.put('profile/bgPhoto', photoData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

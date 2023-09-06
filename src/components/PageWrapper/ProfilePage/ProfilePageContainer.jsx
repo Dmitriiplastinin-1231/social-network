@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { displayUserProfile, updateStatus, savePhoto, updateProfileData } from '../../../redux-toolkit/slices/profileSlice';
+import { displayUserProfile, updateStatus, savePhoto, saveBg, updateProfileData } from '../../../redux-toolkit/slices/profileSlice';
 import ProfilePage from './ProfilePage';
 import { withNavigate } from '../../../hoc/withNavigateFunction';
 import { withParams } from '../../../hoc/withParams';
@@ -35,7 +35,7 @@ class ProfilePageContainer extends React.Component{
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.param.userId != prevProps.param.userId){
+        if (this.props.param.userId !== prevProps.param.userId){
             this.refreshProfile()
         }
     }
@@ -46,6 +46,7 @@ class ProfilePageContainer extends React.Component{
             profile={this.props.profile}
             updateStatus={this.props.updateStatus}
             savePhoto={this.props.savePhoto}
+            saveBg={this.props.saveBg}
             isMyOwn={this.isMyOwn}
             updateProfileData={this.props.updateProfileData}
         />
@@ -60,7 +61,7 @@ let mapStateToProps = (state) => ({
 })
 
 export default compose(
-    connect(mapStateToProps, {displayUserProfile, updateStatus, savePhoto, updateProfileData}),
+    connect(mapStateToProps, {displayUserProfile, updateStatus, savePhoto, saveBg, updateProfileData}),
     withParams,
     withNavigate,
     withAuthRedirect

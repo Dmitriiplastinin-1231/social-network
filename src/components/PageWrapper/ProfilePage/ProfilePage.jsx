@@ -11,11 +11,11 @@ import './ProfilePage.css';
  * @param {Function} updateProfileData Updates the profileData.
  * @returns jsx
  */
-function ProfilePage({profile, updateStatus, savePhoto, isMyOwn=false, updateProfileData}) {
+function ProfilePage({profile, updateStatus, savePhoto, saveBg, isMyOwn=false, updateProfileData}) {
 
 	return(
 		<div>
-			<Profile profile={profile} updateStatus={updateStatus} isMyOwn={isMyOwn} savePhoto={savePhoto} updateProfileData={updateProfileData} />
+			<Profile profile={profile} updateStatus={updateStatus} isMyOwn={isMyOwn} savePhoto={savePhoto} saveBg={saveBg} updateProfileData={updateProfileData} />
 		    <MyPostContainer isMyOwn={isMyOwn} />
 		</div>
 

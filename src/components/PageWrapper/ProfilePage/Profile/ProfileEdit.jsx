@@ -1,14 +1,14 @@
 import { reduxForm, Field } from 'redux-form';
-import { ProfileFormSelect } from '../../../common/FormsControl/FormsControl';
+import { ProfileFormSelect, InputPhoto } from '../../../common/FormsControl/FormsControl';
 import { profileSexError } from '../../../../utilities/validation/validation';
 
 const ProfileEditForm = (props) => {
-
     return (
         <form className='profile__edit-form' onSubmit={ props.handleSubmit } >
             <div className="profile__edit-formtitle">
                 Изменение профиля:
             </div>
+            <Field className='profile__edit-bgInput' classNameImg='profile__edit-bgImg' classNameLabel='profile__edit-bgLabel' classNameSvg='profile__edit-bgSvg' alt='profile bg' name='bg' component={InputPhoto}/>
             <label className='profile__edit-label'>
                 <Field className='profile__edit-field' type='text' component={'input'} name='name' placeholder='Имя' />
                 <Field className='profile__edit-field' type='text' component={'input'} name='age' placeholder='Возраст' />
@@ -24,10 +24,7 @@ const ProfileEditForm = (props) => {
                 <Field className='profile__edit-field' type='text' component={ProfileFormSelect} name='sex' validate={profileSexError} />
             </label>
 
-
-            {/* <label className="profile__edit-buttonlabel"> */}
                 <button className="profile__edit-formbutton" type='submit'>Изменить</button>
-            {/* </label> */}
         </form>
     )
 }
@@ -37,10 +34,20 @@ const ProfileReduxEditForm = reduxForm({form: 'profileEdit'})(ProfileEditForm)
 
 const ProfileEdit = ({ closeEdit, updateProfileData }) => {
     const onSubmit = (data) => {
-        let updateData = {...data};
-        if (data.age) {
-            updateData.age = +data.age;
-        };
+
+        let updateData;
+
+        if (data.bg) {
+            updateData = data.bg;
+        } else {
+            updateData = new FormData();
+        }
+
+        for (let key in data) {
+            if (key !== 'bg') {
+                updateData.append(key, data[key]);
+            }
+        }
 
         updateProfileData(updateData);
     }

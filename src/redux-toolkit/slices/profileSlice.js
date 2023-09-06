@@ -30,8 +30,10 @@ const profileSlice = createSlice({
             state.profile.status = action.payload;
         },
         savePhotoSuccess: (state, action) => {
-            debugger
             state.profile.photo = action.payload.photo;
+        },
+        saveBgPhotoSuccess: (state, action) => {
+            state.profile.bgPhoto = action.payload.bgPhoto;
         },
         setUpdatePost: (state, action) => {
             const post = state.profile.posts.find(post => post.id === action.payload.id);
@@ -82,6 +84,16 @@ export const savePhoto = photo => async dispatch => {
     }
 };
 
+export const saveBg = photo => async dispatch => {
+    let response = await profileApi.setBg(photo);
+
+    if (response.message === 'Bg update successful') {
+        dispatch(saveBgPhotoSuccess(response.user));
+    } else {
+        console.log(response);
+    }
+};
+
 export const addPost = (title, text) => async dispatch => {
     let response = await postApi.createPost(title, text);
 
@@ -119,6 +131,7 @@ export var {
     setUserProfile,
     setUserStatus,
     savePhotoSuccess,
-    setUpdatePost
+    setUpdatePost,
+    saveBgPhotoSuccess
 } = profileSlice.actions;
 export default profileSlice.reducer;
